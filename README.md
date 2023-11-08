@@ -102,7 +102,7 @@ youtube_player_flutter: Cho phép bạn nhúng video từ YouTube vào ứng d�
 
 Clone the project
 
-```bash
+```bash (Coming Soon)
 <<<<<<< HEAD
   https://github.com/qifuong/E-Book-APP/
 =======
@@ -110,7 +110,7 @@ Clone the project
   https://github.com/qifuong/E-Book-APP/
 ```
 
-Open project in the vs code
+Open project in the Android Studio Code or Visual Studio Code
 
 ```bash
   flutter pub get
