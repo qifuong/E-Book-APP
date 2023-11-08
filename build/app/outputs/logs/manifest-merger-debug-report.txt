@@ -74,6 +74,7 @@ MERGED from [:syncfusion_flutter_pdfviewer] F:\flutter_windows_3.13.6-stable\E-B
 MERGED from [:url_launcher_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-16:12
 MERGED from [:google_sign_in_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\google_sign_in_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:webview_flutter_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\webview_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:shared_preferences_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_inappwebview] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\flutter_inappwebview\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-50:12
 MERGED from [:fluttertoast] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:device_info_plus] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\device_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -176,6 +177,8 @@ MERGED from [:google_sign_in_android] F:\flutter_windows_3.13.6-stable\E-Book-ap
 MERGED from [:google_sign_in_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\google_sign_in_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:webview_flutter_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\webview_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:webview_flutter_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\webview_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_inappwebview] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\flutter_inappwebview\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_inappwebview] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\flutter_inappwebview\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:fluttertoast] F:\flutter_windows_3.13.6-stable\E-Book-app-In-Flutter-main\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41

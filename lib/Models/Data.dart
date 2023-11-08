@@ -112,7 +112,7 @@ var bookData = [
           "https://brill.com/flyer/title/32110?print=pdf&pdfGenerator=headless_chrome"),
   BookModel(
       id: "5",
-      title: "War Of The Animals",
+      title: "War Of The Animals 2",
       description:
           "A failed effort to weaponize animals awakens their intellects. The military responds by creating death camps to exterminate infected animals. Moon Shadow, an Arctic white wolf, unites with White Claw, a polar bear king, to form Animus Nor, the first animal republic, to negotiate peace. The uneasy peace is broken with the rise of Azaz, lord of the grizzly bears. Azaz attacks human settlements, considering humans an invasive species that wreaks havoc on bears and the environment. A world war breaks out as animals face humans and each other to see who will become the true apex species.",
       aboutAuthor: "hi my name is Le Minh Hung and i have written this book",

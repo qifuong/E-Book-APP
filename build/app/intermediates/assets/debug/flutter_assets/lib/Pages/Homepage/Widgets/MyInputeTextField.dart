@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'SearchPage.dart';
+import 'package:e_book/Pages/Homepage/Widgets/SuggestedBooks.dart'; // Import danh sách gợi ý sách
 
 class MyInputTextField extends StatelessWidget {
   const MyInputTextField({super.key});
@@ -21,7 +21,7 @@ class MyInputTextField extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => GoogleSearchPage()),
+                    MaterialPageRoute(builder: (context) =>SuggestedBooks()),
                   );
                 },
                 child: SvgPicture.asset("Assets/Icons/search.svg"),
@@ -30,7 +30,7 @@ class MyInputTextField extends StatelessWidget {
               Expanded(
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    hintText: "Search here . .",
+                    hintText: "Ấn Vào Kính Lúp Để Tìm Kiếm . .",
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                     ),

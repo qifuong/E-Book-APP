@@ -17,63 +17,44 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chính Sách Và Quyền Riêng Tư"),
-        backgroundColor: Colors.blue, // Set the app bar background color
+        title: Text("Thông Tin Nhóm Đồ Án"),
+        backgroundColor: Colors.blue,
       ),
       drawer: MyDrawer(),
-      body: SingleChildScrollView(
+      body: Container(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Thông Tin Thêm Về Nhóm Đồ Án",
+              "Chào mừng bạn đến với ứng dụng của chúng tôi!",
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue, // Set the title color
+                color: Colors.blue,
               ),
             ),
             SizedBox(height: 16),
             Text(
-              "Đồ án này thực hiện bởi Huynh Thien Bao, Le Minh Hung Và Le Quy Phuong, Nếu có bất kỳ sai sót trong quá trình thực hiện của đồ án, Mong quý thầy cô thông cảm vào bỏ qua, Cảm ơn mọi người.",
+              "Đây là đồ án thực hiện bởi nhóm chúng tôi gồm:",
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.black, // Set the text color
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
+            SizedBox(height: 8),
+            _buildTeamMember("Le Minh Hung", "21748020100xx - VanLangUni"),
+            _buildTeamMember("Huynh Thien Bao", "21748020100xx - VanLangUni"),
+            _buildTeamMember("Le Quy Phuong", "21748020100xx - VanLangUni"),
             SizedBox(height: 16),
-            Text(
-              "Le Minh Hung - 21748020100xx - VanLangUni",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black, // Set the text color
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "Huynh Thien Bao - 21748020100xx - VanLangUni",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.black, // Set the text color
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "Le Quy Phuong - 21748020100xx - VanLangUni",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black, // Set the text color
-              ),
-            ),
-            SizedBox(height: 10),
             TextButton(
               onPressed: () => _launchURL("https://github.com/qifuong/E-Book-APP/"),
               child: Text(
-                "Liên Kết Đồ Án: https://github.com/qifuong/E-Book-APP/",
+                "Xem dự án trên GitHub",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.blue, // Set the link color
+                  color: Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
               ),
@@ -81,6 +62,30 @@ class AboutPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTeamMember(String name, String info) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          name,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        Text(
+          info,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 8),
+      ],
     );
   }
 }

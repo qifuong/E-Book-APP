@@ -29,14 +29,20 @@ class MyDrawer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text("Nhân Viên Hỗ Trợ"),
+            accountName: Text(
+              "Nhân Viên Hỗ Trợ",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+            ),
             accountEmail: GestureDetector(
-              onTap: copyEmailToClipboard, // Call the function when tapped
+              onTap: copyEmailToClipboard,
               child: Row(
                 children: [
-                  Icon(Icons.email, color: Colors.white),
+                  Icon(Icons.email, color: Colors.blue),
                   SizedBox(width: 6),
-                  Text("support@example.com"),
+                  Text(
+                    "support@example.com",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
                 ],
               ),
             ),
@@ -44,40 +50,52 @@ class MyDrawer extends StatelessWidget {
               child: Icon(
                 Icons.person,
                 size: 60,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
             ),
           ),
           ListTile(
-            title: Text("Trang Chủ"),
-            leading: Icon(Icons.home),
+            title: Text(
+              "Trang Chủ",
+              style: TextStyle(fontSize: 16),
+            ),
+            leading: Icon(Icons.home, color: Colors.blue),
             onTap: () {
               Get.to(HomePage());
             },
           ),
           Divider(thickness: 1),
           ListTile(
-            title: Text("Thông Tin Liên Hệ"),
-            leading: Icon(Icons.phone),
+            title: Text(
+              "Thông Tin Liên Hệ",
+              style: TextStyle(fontSize: 16),
+            ),
+            leading: Icon(Icons.phone, color: Colors.blue),
             onTap: () {
               Get.to(Infor());
             },
           ),
           Divider(thickness: 1),
           ListTile(
-            title: Text("Chính Sách Bảo Mật Và Quyền Riêng Tư"),
-            leading: Icon(Icons.security),
+            title: Text(
+              "Chính Sách Bảo Mật Và Quyền Riêng Tư",
+              style: TextStyle(fontSize: 16),
+            ),
+            leading: Icon(Icons.security, color: Colors.blue),
             onTap: () {
               Get.to(PrivacyPolicy());
             },
           ),
           Divider(thickness: 1),
           ListTile(
-            title: Text("Khác"),
-            leading: Icon(Icons.speaker),
+            title: Text(
+              "Khác",
+              style: TextStyle(fontSize: 16),
+            ),
+            leading: Icon(Icons.speaker, color: Colors.blue),
             onTap: () {
               Get.to(AboutPage());
             },

@@ -1,66 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:e_book/Components/MyDrawer.dart';
 
-class ContacModel {
+class ContactModel {
   final String name;
   final String number;
 
-  ContacModel({required this.name, required this.number});
+  ContactModel({required this.name, required this.number});
 }
 
 class Infor extends StatelessWidget {
   Infor({Key? key}) : super(key: key);
 
-  final List<ContacModel> contaclist = [
-    ContacModel(name: "Le Minh Hung", number: "0908512356"),
-    ContacModel(name: "Truong Thien Bao", number: "091812356"),
-    ContacModel(name: "Le Quy Phuong", number: "0979512356"),
+  final List<ContactModel> contactList = [
+    ContactModel(name: "Le Minh Hung", number: "0908512356"),
+    ContactModel(name: "Truong Thien Bao", number: "091812356"),
+    ContactModel(name: "Le Quy Phuong", number: "0979512356"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gọi Điện Phản Ánh Về Ứng Dụng'),
+        title: Text('Thông Tin Liên Hệ'),
         backgroundColor: Colors.blue,
       ),
       drawer: MyDrawer(),
-      body: Container(
-        padding: EdgeInsets.all(16),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: Text(
-                'Liên Hệ',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                ),
+            Text(
+              'Danh bạ',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
               ),
             ),
-            SizedBox(height: 16),
-            for (var contact in contaclist)
-              InkWell(
+            const SizedBox(height: 16),
+            for (var contact in contactList)
+              GestureDetector(
                 onTap: () => _showCallForwardDialog(context),
                 child: Card(
                   elevation: 4,
-                  margin: EdgeInsets.symmetric(vertical: 12),
+                  margin: EdgeInsets.only(bottom: 16),
                   child: ListTile(
                     contentPadding: EdgeInsets.all(16),
-                    title: Row(
-                      children: [
-                        Icon(Icons.phone, color: Colors.blue), // Phone icon
-                        SizedBox(width: 10),
-                        Text(
-                          contact.name,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                    leading: Icon(
+                      Icons.phone,
+                      color: Colors.blue,
+                      size: 32,
+                    ),
+                    title: Text(
+                      contact.name,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     subtitle: Text(
                       contact.number,

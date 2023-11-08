@@ -9,43 +9,95 @@ class PrivacyPolicy extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Chính Sách Và Quyền Riêng Tư"),
-        backgroundColor: Colors.blue, // Set the app bar background color
+        backgroundColor: Colors.blue,
       ),
       drawer: MyDrawer(),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Chính sách quyền riêng tư dành cho ứng dụng của những nhà phát triển không phải thuộc Google",
+              "Chính Sách Quyền Riêng Tư",
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue, // Set the title color
+                color: Colors.blue,
               ),
             ),
             SizedBox(height: 16),
             Text(
-              "Để giúp bạn quyết định nên tải ứng dụng nào xuống trên Android, các nhà phát triển bên thứ ba có thể bao gồm liên kết đến chính sách quyền riêng tư trên trang chi tiết của ứng dụng của họ trên Google Play. Google cung cấp trường tùy chọn này cho những nhà phát triển muốn chia sẻ chính sách quyền riêng tư của họ với người dùng. Các chính sách quyền riêng tư này là do nhà phát triển viết và không được Google đánh giá.",
+              "Dưới đây là chính sách quyền riêng tư cho ứng dụng của chúng tôi. Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn và sử dụng nó một cách hợp pháp.",
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.black, // Set the text color
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              "Chúng tôi có thể thu thập và lưu trữ các thông tin cá nhân sau đây:",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              "- Tên và thông tin liên hệ",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              "- Thông tin về thiết bị của bạn",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              "- Thông tin về việc sử dụng ứng dụng",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
               ),
             ),
             SizedBox(height: 16),
             Text(
-              "Không phải tất cả ứng dụng Android trên Google Play đều đăng chính sách quyền riêng tư. Nếu ứng dụng có chính sách quyền riêng tư, bạn có thể tìm chính sách đó trên trang chi tiết của ứng dụng trong Google Play.",
+              "Chúng tôi sử dụng thông tin cá nhân này để cải thiện dịch vụ của mình và cung cấp cho bạn trải nghiệm tốt hơn.",
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.black, // Set the text color
+                color: Colors.black,
               ),
             ),
             Text(
-              "Nguồn: https://support.google.com/",
+              "Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu về chính sách quyền riêng tư, vui lòng liên hệ với chúng tôi.",
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.red, // Set the text color
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              "Email: contact@example.com",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.blue,
+              ),
+            ),
+            Text(
+              "Điện thoại: +091812356",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.blue,
+              ),
+            ),
+            Text(
+              "Địa chỉ: 69/68 Đ. Đặng Thuỳ Trâm, Phường 13, Bình Thạnh, Thành phố Hồ Chí Minh 70000",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.blue,
               ),
             ),
           ],

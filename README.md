@@ -42,6 +42,10 @@ This project was made by Huynh Thien Bao, Le Minh Hung and Le Quy Phuong. If the
  - webview_flutter: ^2.0.8  # Use the latest version of webview_flutter
  - flutter_inappwebview: ^5.8.0
  - youtube_player_flutter: ^8.1.0
+ -   shared_preferences: ^2.0.7
+ -   intl: ^0.18.0
+
+
 
 Giải Thích:
 ```
@@ -85,6 +89,9 @@ flutter_inappwebview: Tương tự như webview_flutter, cho phép nhúng trình
 
 youtube_player_flutter: Cho phép bạn nhúng video từ YouTube vào ứng dụng của bạn.
 
+shared_preferences: là một gói Flutter giúp bạn lưu trữ và quản lý dữ liệu cục bộ dễ dàng trên thiết bị của người dùng.
+
+intl: là một gói Flutter dùng để hỗ trợ việc quản lý và định dạng các văn bản, ngày tháng, số và ngôn ngữ khác nhau trong ứng dụng.
 ```
 
 ## Colors Reference Are Used In this projects 
