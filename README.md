@@ -23,7 +23,7 @@ This project was made by Huynh Thien Bao, Le Minh Hung and Le Quy Phuong. If the
 
 ## Packages used 
  - cupertino_icons: ^1.0.2
- -  get: ^4.6.6
+ - get: ^4.6.6
  - flutter_svg: ^2.0.7
  - syncfusion_flutter_pdfviewer: ^23.1.36
  - lottie: ^2.6.0
@@ -31,11 +31,17 @@ This project was made by Huynh Thien Bao, Le Minh Hung and Le Quy Phuong. If the
  - google_sign_in: ^6.1.5
  - firebase_auth: ^4.10.0
  - fluttertoast: ^8.2.2
- - file_picker: ^5.5.0
--  cloud_firestore: ^4.9.2
+ - file_picker: ^6.0.0
+ - cloud_firestore: ^4.9.2
  - firebase_storage: ^11.2.7
  - image_picker: ^1.0.4
- - uuid: ^3.0.7
+ - uuid: ^4.1.0
+ - convert: ^3.1.1
+ - io: ^1.0.4
+ - url_launcher: ^6.0.13
+ - webview_flutter: ^2.0.8  # Use the latest version of webview_flutter
+ - flutter_inappwebview: ^5.8.0
+ - youtube_player_flutter: ^8.1.0
    
 ## Colors Reference Are Used In this projects 
 
