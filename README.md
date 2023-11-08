@@ -84,10 +84,10 @@ Clone the project
 
 ```bash
 <<<<<<< HEAD
-  git clone https://github.com/qifuong/EbookStore
+  https://github.com/qifuong/E-Book-APP/
 =======
 >>>>>>> origin/main
-  git clone https://github.com/qifuong/EbookApp
+  https://github.com/qifuong/E-Book-APP/
 ```
 
 Open project in the vs code
