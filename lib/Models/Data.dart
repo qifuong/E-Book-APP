@@ -4,18 +4,25 @@ var categoryData = [
   {
     "icon": "Assets/Icons/heart.svg",
     "lebel": "Romance",
+    "url": "https://www.goodreads.com/genres/romance",
   },
   {
     "icon": "Assets/Icons/plane.svg",
     "lebel": "Travel",
+    "url": "https://www.goodreads.com/genres/travel",
+
   },
   {
     "icon": "Assets/Icons/world.svg",
     "lebel": "Documentary",
+    "url": "https://www.goodreads.com/genres/Documentary",
+
   },
   {
     "icon": "Assets/Icons/heart.svg",
     "lebel": "Love Story",
+    "url": "https://www.goodreads.com/genres/love-story",
+
   },
 ];
 

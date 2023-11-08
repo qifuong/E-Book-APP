@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:e_book/Components/MyDrawer.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key});
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +57,8 @@ class AboutPage extends StatelessWidget {
                 fontSize: 15,
                 color: Colors.black, // Set the text color
               ),
-            ),SizedBox(height: 10),
+            ),
+            SizedBox(height: 10),
             Text(
               "Le Quy Phuong - 21748020100xx - VanLangUni",
               style: TextStyle(
@@ -57,11 +67,15 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Text(
-              "Nguồn: https://github.com/qifuong/E-Book-APP/",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.red, // Set the text color
+            TextButton(
+              onPressed: () => _launchURL("https://github.com/qifuong/E-Book-APP/"),
+              child: Text(
+                "Liên Kết Đồ Án: https://github.com/qifuong/E-Book-APP/",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.blue, // Set the link color
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ],

@@ -3,10 +3,24 @@ import 'package:e_book/Components/Infor.dart';
 import 'package:e_book/Components/PrivacyPolicy.dart';
 import 'package:e_book/Pages/Homepage/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import services.dart for clipboard access
 import 'package:get/get.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key});
+
+  // Function to copy the email to the clipboard
+  void copyEmailToClipboard() {
+    final String email = "support@example.com";
+    Clipboard.setData(ClipboardData(text: email));
+    Get.snackbar(
+      'Sao chép vào clipboard',
+      'Đã sao chép địa chỉ email vào bảng nhớ tạm',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +30,15 @@ class MyDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text("Nhân Viên Hỗ Trợ"),
-            accountEmail: Row(
-              children: [
-                Icon(Icons.email, color: Colors.white), // Email icon
-                SizedBox(width: 6), // Spacing between icon and text
-                Text("support@example.com"),
-              ],
+            accountEmail: GestureDetector(
+              onTap: copyEmailToClipboard, // Call the function when tapped
+              child: Row(
+                children: [
+                  Icon(Icons.email, color: Colors.white),
+                  SizedBox(width: 6),
+                  Text("support@example.com"),
+                ],
+              ),
             ),
             currentAccountPicture: CircleAvatar(
               child: Icon(
@@ -31,7 +48,7 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.blue, // Set the background color
+              color: Colors.blue,
             ),
           ),
           ListTile(
@@ -57,7 +74,8 @@ class MyDrawer extends StatelessWidget {
               Get.to(PrivacyPolicy());
             },
           ),
-          Divider(thickness: 1),ListTile(
+          Divider(thickness: 1),
+          ListTile(
             title: Text("Khác"),
             leading: Icon(Icons.speaker),
             onTap: () {

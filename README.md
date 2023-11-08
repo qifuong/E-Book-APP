@@ -42,7 +42,31 @@ This project was made by Huynh Thien Bao, Le Minh Hung and Le Quy Phuong. If the
  - webview_flutter: ^2.0.8  # Use the latest version of webview_flutter
  - flutter_inappwebview: ^5.8.0
  - youtube_player_flutter: ^8.1.0
-   
+
+Giải Thích:
+```
+cupertino_icons: Cung cấp biểu tượng Cupertino cho iOS.
+get: Gói quản lý trạng thái và điều hướng trong ứng dụng Flutter.
+flutter_svg: Cho phép bạn hiển thị và làm việc với hình ảnh SVG.
+syncfusion_flutter_pdfviewer: Gói này cho phép hiển thị tệp PDF trong ứng dụng của bạn.
+lottie: Cho phép bạn sử dụng tệp Lottie để hiển thị hoạt ảnh trong ứng dụng.
+firebase_core: Dùng để cấu hình Firebase trong ứng dụng của bạn.
+google_sign_in: Để tích hợp đăng nhập bằng Google.
+firebase_auth: Để quản lý xác thực người dùng với Firebase.
+fluttertoast: Sử dụng để hiển thị thông báo Toast.
+file_picker: Cho phép bạn chọn tệp trong ứng dụng của bạn.
+cloud_firestore: Để tương tác với cơ sở dữ liệu Firestore của Firebase.
+firebase_storage: Sử dụng để lưu trữ và quản lý tệp trên Firebase Storage.
+image_picker: Cho phép bạn chọn hình ảnh từ thư viện hoặc máy ảnh của thiết bị.
+uuid: Để tạo UUID (định danh duy nhất không trùng lặp).
+convert: Dùng để chuyển đổi dữ liệu giữa các kiểu khác nhau, ví dụ: JSON.
+io: Gói này không có trong danh sách gói chuẩn của Flutter. Có vẻ như bạn đã nhập sai tên gói.
+url_launcher: Cho phép bạn mở các liên kết URL bên ngoài ứng dụng của bạn.
+webview_flutter: Sử dụng để nhúng trình duyệt web (WebView) trong ứng dụng của bạn.
+flutter_inappwebview: Tương tự như webview_flutter, cho phép nhúng trình duyệt web trong ứng dụng.
+youtube_player_flutter: Cho phép bạn nhúng video từ YouTube vào ứng dụng của bạn.
+```
+
 ## Colors Reference Are Used In this projects 
 
 | Color             | Hex                                                                |

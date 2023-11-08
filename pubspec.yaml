@@ -51,7 +51,7 @@ dependencies:
   convert: ^3.1.1
   io: ^1.0.4
   url_launcher: ^6.0.13
-  webview_flutter: ^2.0.8  # Use the latest version of webview_flutter
+  webview_flutter: ^2.1.0
   flutter_inappwebview: ^5.8.0
   youtube_player_flutter: ^8.1.0
 
@@ -83,7 +83,7 @@ flutter:
     - Assets/Icons/
     - Assets/Animation/
     - android/build.gradle
-   # - images/a_dot_ham.jpeg
+    - lib/Pages/Homepage/Widgets/MyInputeTextField.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
