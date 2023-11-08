@@ -1,0 +1,9 @@
+> Task :syncfusion_flutter_pdfviewer:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\Admin\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: E0:ED:D6:8E:24:D8:6F:9B:2B:12:FD:CE:42:2A:28:8E
+SHA1: 18:BF:81:70:E9:89:1B:9D:4A:5D:88:C1:B8:2F:1A:F7:1C:90:F2:46
+SHA-256: 52:08:75:24:26:FC:FE:99:42:20:12:91:73:EB:3E:CB:F7:30:22:EF:77:FE:0E:78:89:3A:9D:54:07:B1:9F:D0
+Valid until: Wednesday, October 8, 2053

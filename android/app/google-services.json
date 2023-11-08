@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "708508179122",
+    "project_id": "e-book-store-ea70e",
+    "storage_bucket": "e-book-store-ea70e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708508179122:android:f69ab036d75e86eb7c87ab",
+        "android_client_info": {
+          "package_name": "com.example.e_book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708508179122-ird0kgnfsp31cijeia16l5dksigakq7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0ntlwzRUtOfD22WdnrgX_dqdrLCvat3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708508179122-ird0kgnfsp31cijeia16l5dksigakq7a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "708508179122-kqv7of771r0nmoucpeie9tqlma95edbe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eBook.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
