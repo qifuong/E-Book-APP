@@ -113,5 +113,5 @@ https://github.com/qifuong/
 ```
 Link Figma
 ```
-https://www.figma.com/file/kOBwYviQnDMO9xKYp7pB6J/Untitled?type=design&node-id=1-117&mode=design&t=qwidU0OABImhfVAT-0
+https://www.figma.com/community/file/1303830658530235609
 ```
