@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
+
 import '../../../Components/BookCard.dart';
 import '../../../Models/BookModel.dart';
 import '../../../Models/Data.dart';
 import '../../BookDetails/BookDetails.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 
 class SuggestedBooks extends StatefulWidget {
   @override
@@ -76,21 +77,52 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
     }
   }
 
-  void addToViewedBooks(BookModel book) {
-    setState(() {
-      viewedBooks.add({
-        'book': book,
-        'time': getVietnamTime(),
-      });
-    });
-    saveViewedBooks();
-  }
-
-  String getVietnamTime() {
-    final now = DateTime.now().toUtc();
-    final vietnamTime = now.add(Duration(hours: 7));
-    final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
-    return formatter.format(vietnamTime);
+  void showViewedBooksDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Sách đã xem'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: viewedBooks.map((item) {
+                final book = item['book'];
+                final time = item['time'];
+                return ListTile(
+                  title: Text('${book.title} - $time'),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BookDetails(book: book),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Đóng'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  viewedBooks = [];
+                });
+                saveViewedBooks();
+                Navigator.pop(context);
+              },
+              child: Text('Xoá lịch sử'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -105,6 +137,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
           'Tìm kiếm sách',
           style: TextStyle(fontSize: 24, color: Colors.blue),
         ),
+        backgroundColor: Colors.white,
       ),
       body: Column(
         children: [
@@ -121,16 +154,17 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
               decoration: InputDecoration(
                 hintText: 'Tìm kiếm sách...',
                 hintStyle: TextStyle(fontSize: 16, color: Colors.grey),
+                fillColor: Colors.white,
               ),
               style: TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
           Expanded(
-            child: ListView.separated(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, // Hiển thị thành hai cột
+              ),
               itemCount: suggestedBooks.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(height: 10); // Khoảng cách 10 pixel giữa các mục
-              },
               itemBuilder: (context, index) {
                 return BookCard(
                   coverUrl: suggestedBooks[index].coverUrl!,
@@ -149,56 +183,28 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
           ),
         ],
       ),
-      floatingActionButton: IconButton(
-        icon: Icon(Icons.history),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text('Sách đã xem'),
-                content: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: viewedBooks.map((item) {
-                      final book = item['book'];
-                      final time = item['time'];
-                      return ListTile(
-                        title: Text('${book.title} - $time'),
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => BookDetails(book: book),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Đóng'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        viewedBooks = [];
-                      });
-                      saveViewedBooks();
-                      Navigator.pop(context);
-                    },
-                    child: Text('Xoá lịch sử'),
-                  ),
-                ],
-              );
-            },
-          );
-        },
+      floatingActionButton: FloatingActionButton(
+        onPressed: showViewedBooksDialog,
+        child: Icon(Icons.history),
+        backgroundColor: Colors.blue,
       ),
     );
   }
+
+  void addToViewedBooks(BookModel book) {
+    setState(() {
+      viewedBooks.add({
+        'book': book,
+        'time': getVietnamTime(),
+      });
+    });
+    saveViewedBooks();
+  }
+}
+
+String getVietnamTime() {
+  final now = DateTime.now();
+  final vietnamTime = now.toLocal();
+  final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+  return formatter.format(vietnamTime);
 }
