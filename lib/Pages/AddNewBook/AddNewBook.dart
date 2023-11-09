@@ -7,8 +7,8 @@ import 'package:e_book/Controller/PdfController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddNewBookPage extends StatelessWidget {
-  const AddNewBookPage({super.key});
+class AddNewBook extends StatelessWidget {
+  const AddNewBook({super.key});
 
   @override
   Widget build(BuildContext context) {

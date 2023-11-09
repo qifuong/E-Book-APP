@@ -14,17 +14,34 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
   String errorMessage = "";
   String successMessage = "";
   String adminMessage = "";
+  int wrongPasswordCount = 0;
+  bool isVerificationFrozen = false;
 
-  TextEditingController popupPasswordController = TextEditingController(); // Thêm một TextEditingController riêng cho popup
+  TextEditingController popupPasswordController = TextEditingController();
+  String popupErrorMessage = "";
 
   void verifyAdmin() {
+    if (isVerificationFrozen) {
+      return;
+    }
+
     String userInput = passwordController.text;
     if (userInput == "Hung") {
-      // Người dùng "Hung" sẽ bị chuyển về trang trước đó
       Navigator.pop(context);
     } else if (userInput == "Phuong") {
-      // Hiển thị hộp thoại nhập mật khẩu cho admin
-      popupPasswordController.text = ""; // Đặt giá trị ban đầu cho passwordController của popup
+      if (wrongPasswordCount >= 5) {
+        errorMessage = "Bạn đã nhập sai mật khẩu quá nhiều lần. Chức năng đã bị đóng băng.";
+        setState(() {});
+        Future.delayed(const Duration(seconds: 5), () {
+          errorMessage = "";
+          wrongPasswordCount = 0;
+          isVerificationFrozen = false;
+          setState(() {});
+          Navigator.pop(context); // Chuyển người dùng về trang trước đó sau 5 giây
+        });
+        return;
+      }
+      popupPasswordController.text = "";
       showDialog(
         context: context,
         builder: (context) {
@@ -37,7 +54,7 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
                   children: [
                     const Text("Vui lòng nhập mật khẩu cho admin:"),
                     TextField(
-                      controller: popupPasswordController, // Sử dụng TextEditingController riêng cho popup
+                      controller: popupPasswordController,
                       obscureText: true,
                       decoration: const InputDecoration(
                         labelText: "Mật khẩu",
@@ -46,7 +63,7 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      errorMessage,
+                      popupErrorMessage, // Hiển thị thông báo lỗi trong hộp thoại
                       style: const TextStyle(color: Colors.red),
                     ),
                     Text(
@@ -58,28 +75,38 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
-                      if (popupPasswordController.text == adminPassword) { // Sử dụng TextEditingController của popup
-                        setState(() {
-                          successMessage = "Xác minh thành công!";
-                          adminMessage = "Mật khẩu đúng!";
-                          errorMessage = "";
-                        });
+                      if (popupPasswordController.text == adminPassword) {
+                        successMessage = "Xác minh thành công!";
+                        adminMessage = "Mật khẩu đúng!";
+                        popupErrorMessage = ""; // Xóa thông báo lỗi
+                        errorMessage = ""; // Xóa thông báo lỗi trong trang chính
+                        setState(() {});
                         Future.delayed(const Duration(seconds: 3), () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const AddNewBookPage()),
+                            MaterialPageRoute(builder: (context) => const AddNewBook()),
                           );
-                          popupPasswordController.text = ""; // Đặt lại giá trị của TextEditingController của popup
-                          setState(() {
-                            successMessage = "";
-                            adminMessage = "";
-                          });
+                          popupPasswordController.clear();
+                          successMessage = "";
+                          adminMessage = "";
+                          setState(() {});
                         });
                       } else {
-                        setState(() {
-                          errorMessage = "Mật khẩu không đúng. Vui lòng thử lại.";
-                          adminMessage = "";
-                        });
+                        popupErrorMessage = "Mật khẩu không đúng. Vui lòng thử lại.";
+                        adminMessage = "";
+                        wrongPasswordCount++;
+                        setState(() {});
+
+                        if (wrongPasswordCount == 3) {
+                          popupErrorMessage = "Bạn đã nhập sai mật khẩu 3 lần.";
+                          setState(() {});
+                        }
+
+                        if (wrongPasswordCount == 5) {
+                          popupErrorMessage = "Bạn đã nhập sai mật khẩu 5 lần. Chức năng đã bị đóng băng.";
+                          isVerificationFrozen = true;
+                          setState(() {});
+                        }
                       }
                     },
                     child: const Text("Xác minh"),
@@ -91,16 +118,34 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
         },
       );
     } else {
-      setState(() {
-        errorMessage = "Tên Admin không đúng. Vui lòng thử lại.";
-      });
+      errorMessage = "Tên Admin không đúng. Vui lòng thử lại.";
+      adminMessage = "";
+      wrongPasswordCount++;
+      setState(() {});
 
-      Future.delayed(const Duration(seconds: 3), () {
-        setState(() {
+      if (wrongPasswordCount == 3) {
+        errorMessage = "Cảnh Báo !!! Bạn đã nhập sai mật khẩu 3 lần.";
+        setState(() {});
+      }
+
+      if (wrongPasswordCount == 5) {
+        errorMessage = "Bạn đã nhập sai mật khẩu 5 lần. Chức năng đã bị đóng băng.";
+        isVerificationFrozen = true;
+        Future.delayed(const Duration(seconds: 5), () {
           errorMessage = "";
+          wrongPasswordCount = 0;
+          isVerificationFrozen = false;
+          setState(() {});
+          Navigator.pop(context); // Chuyển người dùng về trang trước đó sau 5 giây
         });
-      });
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    passwordController.clear();
+    super.dispose();
   }
 
   @override
@@ -108,7 +153,7 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Xác minh"),
-        backgroundColor: Colors.blue, // Màu nền của AppBar
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Padding(
@@ -130,9 +175,9 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: verifyAdmin,
+                onPressed: wrongPasswordCount < 5 ? verifyAdmin : null,
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: Colors.blue, // Màu chữ trên nút
+                  foregroundColor: Colors.white, backgroundColor: Colors.blue,
                 ),
                 child: const Text("Xác minh"),
               ),
