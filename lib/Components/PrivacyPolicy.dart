@@ -8,12 +8,12 @@ class PrivacyPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chính Sách Và Quyền Riêng Tư"),
+        title: const Text("Chính Sách Và Quyền Riêng Tư"),
         backgroundColor: Colors.blue,
       ),
-      drawer: MyDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      drawer: const MyDrawer(),
+      body: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

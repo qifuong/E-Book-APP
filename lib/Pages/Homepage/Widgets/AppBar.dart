@@ -28,7 +28,7 @@ class HomeAppBar extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Get.to(ProfilePage());
+            Get.to(const ProfilePage());
           },
           child: CircleAvatar(
               radius: 25,

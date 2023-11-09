@@ -9,6 +9,8 @@ import '../../../Models/Data.dart';
 import '../../BookDetails/BookDetails.dart';
 
 class SuggestedBooks extends StatefulWidget {
+  const SuggestedBooks({super.key});
+
   @override
   _SuggestedBooksState createState() => _SuggestedBooksState();
 }
@@ -82,7 +84,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Sách đã xem'),
+          title: const Text('Sách đã xem'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -107,7 +109,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Đóng'),
+              child: const Text('Đóng'),
             ),
             TextButton(
               onPressed: () {
@@ -117,7 +119,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
                 saveViewedBooks();
                 Navigator.pop(context);
               },
-              child: Text('Xoá lịch sử'),
+              child: const Text('Xoá lịch sử'),
             ),
           ],
         );
@@ -133,7 +135,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Tìm kiếm sách',
           style: TextStyle(fontSize: 24, color: Colors.blue),
         ),
@@ -142,7 +144,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextField(
               controller: _searchController,
               onChanged: (text) {
@@ -151,17 +153,17 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
               onSubmitted: (text) {
                 _searchController.clear();
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Tìm kiếm sách...',
                 hintStyle: TextStyle(fontSize: 16, color: Colors.grey),
                 fillColor: Colors.white,
               ),
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
           Expanded(
             child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1, // Hiển thị thành hai cột
               ),
               itemCount: suggestedBooks.length,
@@ -185,8 +187,8 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: showViewedBooksDialog,
-        child: Icon(Icons.history),
         backgroundColor: Colors.blue,
+        child: const Icon(Icons.history),
       ),
     );
   }

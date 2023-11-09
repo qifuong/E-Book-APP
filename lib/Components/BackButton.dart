@@ -14,7 +14,7 @@ class MyBackButton extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset("Assets/Icons/back.svg"),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Text(

@@ -1,19 +1,13 @@
 import 'package:e_book/Components/BackButton.dart';
 import 'package:e_book/Components/BookTile.dart';
-import 'package:e_book/Components/PrimaryButton.dart';
-import 'package:e_book/Config/Colors.dart';
 import 'package:e_book/Controller/AuthController.dart';
 import 'package:e_book/Controller/BookController.dart';
 import 'package:e_book/Models/Data.dart';
-import 'package:e_book/Pages/AddNewBook/AddNewBook.dart';
+import 'package:e_book/Pages/AddNewBook/AdminVerificationPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
-import '../../Components/BookCard.dart';
 import '../BookDetails/BookDetails.dart';
-import '../Homepage/HomePage.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -26,7 +20,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(AddNewBookPage());
+          Get.to(AdminVerificationPage());
         },
         child: Icon(
           Icons.add,

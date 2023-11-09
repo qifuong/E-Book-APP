@@ -18,7 +18,7 @@ class BookActionBtn extends StatelessWidget {
       },
       child: Container(
         height: 60,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.circular(50),
@@ -28,7 +28,7 @@ class BookActionBtn extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset("Assets/Icons/book.svg"),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 "Read Book",
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(

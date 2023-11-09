@@ -13,11 +13,11 @@ class SplaceController extends GetxController {
   }
 
   void splaceController() {
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (auth.currentUser != null) {
-        Get.offAll(HomePage());
+        Get.offAll(const HomePage());
       } else {
-        Get.offAll(WelcomePage());
+        Get.offAll(const WelcomePage());
       }
     });
   }

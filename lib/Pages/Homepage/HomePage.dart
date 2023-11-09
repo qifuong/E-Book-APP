@@ -1,7 +1,6 @@
 import 'package:e_book/Components/BookCard.dart';
 import 'package:e_book/Components/BookTile.dart';
 import 'package:e_book/Components/MyDrawer.dart';
-import 'package:e_book/Config/Colors.dart';
 import 'package:e_book/Controller/BookController.dart';
 import 'package:e_book/Models/Data.dart';
 import 'package:e_book/Pages/BookDetails/BookDetails.dart';
@@ -9,7 +8,6 @@ import 'package:e_book/Pages/Homepage/Widgets/AppBar.dart';
 import 'package:e_book/Pages/Homepage/Widgets/CategoryWidget.dart';
 import 'package:e_book/Pages/Homepage/Widgets/MyInputeTextField.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,12 +18,12 @@ class HomePage extends StatelessWidget {
     BookController bookController = Get.put(BookController());
     bookController.getUserBook();
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
               color: Theme.of(context).colorScheme.primary,
               height: 450,
               child: Expanded(
@@ -34,9 +32,9 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          SizedBox(height: 30),
-                          HomeAppBar(),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 30),
+                          const HomeAppBar(),
+                          const SizedBox(height: 50),
                           Row(
                             children: [
                               Text(
@@ -63,7 +61,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Row(
                             children: [
                               Flexible(
@@ -81,9 +79,9 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
-                          MyInputTextField(),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
+                          const MyInputTextField(),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
                               Text(
@@ -99,7 +97,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -121,7 +119,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
@@ -134,7 +132,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -153,7 +151,7 @@ class HomePage extends StatelessWidget {
                           .toList(),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Text(
@@ -162,7 +160,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Column(
                       children: bookData
                           .map((e) => BookTile(

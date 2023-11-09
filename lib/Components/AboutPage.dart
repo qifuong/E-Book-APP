@@ -17,16 +17,16 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Thông Tin Nhóm Đồ Án"),
+        title: const Text("Thông Tin Nhóm Đồ Án"),
         backgroundColor: Colors.blue,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Chào mừng bạn đến với ứng dụng của chúng tôi!",
               style: TextStyle(
                 fontSize: 28,
@@ -34,8 +34,8 @@ class AboutPage extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               "Đây là đồ án thực hiện bởi nhóm chúng tôi gồm:",
               style: TextStyle(
                 fontSize: 18,
@@ -43,14 +43,14 @@ class AboutPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildTeamMember("Le Minh Hung", "21748020100xx - VanLangUni"),
             _buildTeamMember("Huynh Thien Bao", "21748020100xx - VanLangUni"),
             _buildTeamMember("Le Quy Phuong", "21748020100xx - VanLangUni"),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextButton(
               onPressed: () => _launchURL("https://github.com/qifuong/E-Book-APP/"),
-              child: Text(
+              child: const Text(
                 "Xem dự án trên GitHub",
                 style: TextStyle(
                   fontSize: 16,
@@ -71,7 +71,7 @@ class AboutPage extends StatelessWidget {
       children: [
         Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -79,12 +79,12 @@ class AboutPage extends StatelessWidget {
         ),
         Text(
           info,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: Colors.black,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
       ],
     );
   }

@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_book/Config/Messages.dart';
 import 'package:e_book/Models/BookModel.dart';
@@ -69,14 +67,16 @@ class BookController extends GetxController {
     final XFile? image =
     await imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      print(image.path);
+      if (kDebugMode) {
+        print(image.path);
+      }
       uploadImageToFirebase(File(image.path));
     }
     isImageUploading.value = false;
   }
 
   void uploadImageToFirebase(File image) async {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     var filename = uuid.v1();
     var storageRef = storage.ref().child("Images/$filename");
     var response = await storageRef.putFile(image);
@@ -136,18 +136,25 @@ class BookController extends GetxController {
       if (file.existsSync()) {
         Uint8List fileBytes = await file.readAsBytes();
         String fileName = result.files.first.name;
-        print("File Bytes: $fileBytes");
+        if (kDebugMode) {
+          print("File Bytes: $fileBytes");
+        }
 
         final response =
         await storage.ref().child("Pdf/$fileName").putData(fileBytes);
 
         final downloadURL = await response.ref.getDownloadURL();
         pdfUrl.value = downloadURL;
-        print(downloadURL);
+        if (kDebugMode) {
+          print(downloadURL);
+        }
       } else {
-        print("File does not exist");
+        if (kDebugMode) {
+          print("File does not exist");
+        }
       }
     } else {
+      // ignore: avoid_print
       print("No file selected");
     }
     isPdfUploading.value = false;

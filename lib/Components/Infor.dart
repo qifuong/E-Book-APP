@@ -9,7 +9,7 @@ class ContactModel {
 }
 
 class Infor extends StatelessWidget {
-  Infor({Key? key}) : super(key: key);
+  Infor({super.key});
 
   final List<ContactModel> contactList = [
     ContactModel(name: "Le Minh Hung", number: "0908512356"),
@@ -21,16 +21,16 @@ class Infor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thông Tin Liên Hệ'),
+        title: const Text('Thông Tin Liên Hệ'),
         backgroundColor: Colors.blue,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Danh bạ',
               style: TextStyle(
                 fontSize: 24,
@@ -44,24 +44,24 @@ class Infor extends StatelessWidget {
                 onTap: () => _showCallForwardDialog(context),
                 child: Card(
                   elevation: 4,
-                  margin: EdgeInsets.only(bottom: 16),
+                  margin: const EdgeInsets.only(bottom: 16),
                   child: ListTile(
-                    contentPadding: EdgeInsets.all(16),
-                    leading: Icon(
+                    contentPadding: const EdgeInsets.all(16),
+                    leading: const Icon(
                       Icons.phone,
                       color: Colors.blue,
                       size: 32,
                     ),
                     title: Text(
                       contact.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
                       contact.number,
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                 ),
@@ -97,7 +97,7 @@ class _CountdownDialogState extends State<_CountdownDialog> {
   }
 
   void startCountdown() {
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (countdown > 1) {
         setState(() {
           countdown -= 1;
@@ -119,7 +119,7 @@ class _CountdownDialogState extends State<_CountdownDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );

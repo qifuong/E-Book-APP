@@ -28,16 +28,16 @@ class BookDetailsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 50),
+        const SizedBox(height: 50),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MyBackButton(),
+            const MyBackButton(),
             SvgPicture.asset("Assets/Icons/heart.svg",
                 color: Theme.of(context).colorScheme.background),
           ],
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,7 +50,7 @@ class BookDetailsHeader extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Text(
           title,
           style: Theme.of(context)
@@ -65,7 +65,7 @@ class BookDetailsHeader extends StatelessWidget {
               .labelMedium
               ?.copyWith(color: Theme.of(context).colorScheme.background),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           description,
           textAlign: TextAlign.center,

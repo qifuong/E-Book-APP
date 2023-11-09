@@ -2,6 +2,7 @@ import 'package:e_book/Config/Messages.dart';
 import 'package:e_book/Pages/Homepage/HomePage.dart';
 import 'package:e_book/Pages/WelcomePage/WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -22,9 +23,11 @@ class AuthController extends GetxController {
       );
       await auth.signInWithCredential(credential);
       successMessage('Login Success');
-      Get.offAll(HomePage());
+      Get.offAll(const HomePage());
     } catch (ex) {
-      print(ex);
+      if (kDebugMode) {
+        print(ex);
+      }
       errorMessage("Error ! Try Agin");
     }
     isLoading.value = false;
@@ -33,6 +36,6 @@ class AuthController extends GetxController {
   void signout() async {
     await auth.signOut();
     successMessage('Logout');
-    Get.offAll(WelcomePage());
+    Get.offAll(const WelcomePage());
   }
 }

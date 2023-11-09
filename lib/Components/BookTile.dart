@@ -30,7 +30,7 @@ class BookTile extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
             borderRadius: BorderRadius.circular(15),
@@ -43,7 +43,7 @@ class BookTile extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 8,
-                      offset: Offset(-2, -2),
+                      offset: const Offset(-2, -2),
                     )
                   ]),
                   child: ClipRRect(
@@ -53,7 +53,7 @@ class BookTile extends StatelessWidget {
                       width: 100,
                     ),
                   )),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,10 +61,10 @@ class BookTile extends StatelessWidget {
                   Text(title,
                       maxLines: 10,
                       style: Theme.of(context).textTheme.bodyMedium),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text("By: $author",
                       style: Theme.of(context).textTheme.bodyMedium),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     "Mã Giảm Giá: $price",
                     style: Theme.of(context)

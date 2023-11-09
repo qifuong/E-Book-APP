@@ -16,7 +16,7 @@ class MyInputTextField extends StatelessWidget {
           ),
           child: Row(
             children: [
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -26,7 +26,7 @@ class MyInputTextField extends StatelessWidget {
                 },
                 child: SvgPicture.asset("Assets/Icons/search.svg"),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: TextFormField(
                   decoration: const InputDecoration(

@@ -29,31 +29,33 @@ class AddNewBookPage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            MyBackButton(),
+                            const MyBackButton(),
                             Text(
-                              "ADD NEW BOOK",
+                              "ADD NEW BOOK ADMIN",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
                                   ?.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                              ),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                  ),
                             ),
-                            SizedBox(width: 70),
+                            const SizedBox(width: 40),
                           ],
                         ),
-                        SizedBox(height: 60),
+                        const SizedBox(height: 60),
                         InkWell(
                           onTap: () {
                             bookController.pickImage();
                           },
                           child: Obx(
-                                () => Container(
+                            () => Container(
                               height: 190,
                               width: 150,
                               decoration: BoxDecoration(
@@ -62,23 +64,25 @@ class AddNewBookPage extends StatelessWidget {
                               ),
                               child: Center(
                                 child: bookController.isImageUploading.value
-                                    ? CircularProgressIndicator(
-                                  color: primaryColor,
-                                )
+                                    ? const CircularProgressIndicator(
+                                        color: primaryColor,
+                                      )
                                     : bookController.imageUrl.value == ""
-                                    ? Image.asset("Assets/Icons/addImage.png")
-                                    : ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    bookController.imageUrl.value,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                        ? Image.asset(
+                                            "Assets/Icons/addImage.png")
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.network(
+                                              bookController.imageUrl.value,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
@@ -93,8 +97,8 @@ class AddNewBookPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Obx(
-                              () => Container(
-                            padding: EdgeInsets.all(16),
+                          () => Container(
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: bookController.pdfUrl.value == ""
                                   ? Theme.of(context).colorScheme.primary
@@ -102,84 +106,92 @@ class AddNewBookPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: bookController.isPdfUploading.value
-                                ? Center(
-                              child: CircularProgressIndicator(
-                                color: backgroudColor,
-                              ),
-                            )
+                                ? const Center(
+                                    child: CircularProgressIndicator(
+                                      color: backgroudColor,
+                                    ),
+                                  )
                                 : bookController.pdfUrl.value == ""
-                                ? InkWell(
-                              onTap: () {
-                                bookController.pickPDF();
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset("Assets/Icons/upload.png"),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    "Book PDF",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                      color:
-                                      Theme.of(context).colorScheme.background,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                                : InkWell(
-                              onTap: () {
-                                bookController.pdfUrl.value = "";
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset("Assets/Icons/delete.png", width: 20),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    "Delete Pdf",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                      color: Theme.of(context).colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                                    ? InkWell(
+                                        onTap: () {
+                                          bookController.pickPDF();
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                                "Assets/Icons/upload.png"),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                              "Book PDF",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .background,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : InkWell(
+                                        onTap: () {
+                                          bookController.pdfUrl.value = "";
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                                "Assets/Icons/delete.png",
+                                                width: 20),
+                                            SizedBox(width: 8),
+                                            Text(
+                                              "Delete Pdf",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   MyTextFormField(
                     hintText: "Tựa Đề",
                     icon: Icons.book,
                     controller: bookController.title,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   MultiLineTextField(
                     hintText: "Mô Tả Sách",
                     controller: bookController.des,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   MyTextFormField(
                     hintText: "Tên Tác Giả",
                     icon: Icons.person,
                     controller: bookController.auth,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   MyTextFormField(
                     hintText: "Thông Tin Tác Giả",
                     icon: Icons.person,
                     controller: bookController.aboutAuth,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Expanded(
@@ -190,7 +202,7 @@ class AddNewBookPage extends StatelessWidget {
                           controller: bookController.price,
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: MyTextFormField(
                           hintText: "Số Trang",
@@ -201,7 +213,7 @@ class AddNewBookPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Expanded(
@@ -211,7 +223,7 @@ class AddNewBookPage extends StatelessWidget {
                           controller: bookController.language,
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: MyTextFormField(
                           hintText: "Audio Len (coming soon)",
@@ -221,7 +233,7 @@ class AddNewBookPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
@@ -230,7 +242,7 @@ class AddNewBookPage extends StatelessWidget {
                             Get.back(); // Navigate back to the previous screen
                           },
                           child: Container(
-                            padding: EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
@@ -241,62 +253,67 @@ class AddNewBookPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.close,
                                   color: Colors.red,
                                 ),
-                                SizedBox(width: 8),
+                                const SizedBox(width: 8),
                                 Text(
                                   "Huỷ",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge
                                       ?.copyWith(
-                                    color: Colors.red,
-                                  ),
+                                        color: Colors.red,
+                                      ),
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Obx(
-                              () => Container(
-                            padding: EdgeInsets.all(16),
+                          () => Container(
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.primary,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: bookController.isPdfUploading.value
-                                ? Center(
-                              child: CircularProgressIndicator(),
-                            )
+                                ? const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
                                 : InkWell(
-                              onTap: () {
-                                bookController.createBook();
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.upload_sharp,
-                                    color: Theme.of(context).colorScheme.background,
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    "Đăng",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                      color: Theme.of(context).colorScheme.background,
+                                    onTap: () {
+                                      bookController.createBook();
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.upload_sharp,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          "Đăng",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .background,
+                                              ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
                           ),
                         ),
                       ),

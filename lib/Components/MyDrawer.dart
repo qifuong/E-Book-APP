@@ -11,8 +11,8 @@ class MyDrawer extends StatelessWidget {
 
   // Function to copy the email to the clipboard
   void copyEmailToClipboard() {
-    final String email = "support@example.com";
-    Clipboard.setData(ClipboardData(text: email));
+    const String email = "support@example.com";
+    Clipboard.setData(const ClipboardData(text: email));
     Get.snackbar(
       'Sao chép vào clipboard',
       'Đã sao chép địa chỉ email vào bảng nhớ tạm',
@@ -29,13 +29,13 @@ class MyDrawer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text(
+            accountName: const Text(
               "Nhân Viên Hỗ Trợ",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
             ),
             accountEmail: GestureDetector(
               onTap: copyEmailToClipboard,
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.email, color: Colors.blue),
                   SizedBox(width: 6),
@@ -46,61 +46,61 @@ class MyDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            currentAccountPicture: CircleAvatar(
+            currentAccountPicture: const CircleAvatar(
               child: Icon(
                 Icons.person,
                 size: 60,
                 color: Colors.black,
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
           ),
           ListTile(
-            title: Text(
+            title: const Text(
               "Trang Chủ",
               style: TextStyle(fontSize: 16),
             ),
-            leading: Icon(Icons.home, color: Colors.blue),
+            leading: const Icon(Icons.home, color: Colors.blue),
             onTap: () {
-              Get.to(HomePage());
+              Get.to(const HomePage());
             },
           ),
-          Divider(thickness: 1),
+          const Divider(thickness: 1),
           ListTile(
-            title: Text(
+            title: const Text(
               "Thông Tin Liên Hệ",
               style: TextStyle(fontSize: 16),
             ),
-            leading: Icon(Icons.phone, color: Colors.blue),
+            leading: const Icon(Icons.phone, color: Colors.blue),
             onTap: () {
               Get.to(Infor());
             },
           ),
-          Divider(thickness: 1),
+          const Divider(thickness: 1),
           ListTile(
-            title: Text(
+            title: const Text(
               "Chính Sách Bảo Mật Và Quyền Riêng Tư",
               style: TextStyle(fontSize: 16),
             ),
-            leading: Icon(Icons.security, color: Colors.blue),
+            leading: const Icon(Icons.security, color: Colors.blue),
             onTap: () {
-              Get.to(PrivacyPolicy());
+              Get.to(const PrivacyPolicy());
             },
           ),
-          Divider(thickness: 1),
+          const Divider(thickness: 1),
           ListTile(
-            title: Text(
+            title: const Text(
               "Khác",
               style: TextStyle(fontSize: 16),
             ),
-            leading: Icon(Icons.speaker, color: Colors.blue),
+            leading: const Icon(Icons.speaker, color: Colors.blue),
             onTap: () {
-              Get.to(AboutPage());
+              Get.to(const AboutPage());
             },
           ),
-          Divider(thickness: 1),
+          const Divider(thickness: 1),
         ],
       ),
     );
