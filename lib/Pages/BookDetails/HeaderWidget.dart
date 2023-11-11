@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../Components/FavoriteBooksProvider.dart';
+import '../../Components/FavoriteBooksScreen.dart';
 
+// Widget cho phần header của trang chi tiết sách
 class BookDetailsHeader extends StatefulWidget {
   final String coverUrl;
   final String title;
@@ -12,8 +14,9 @@ class BookDetailsHeader extends StatefulWidget {
   final String language;
   final String audioLen;
 
+  // Const nhận các thông tin về sách để hiển thị
   const BookDetailsHeader({
-    Key? key,
+    super.key, // Thêm Key? key
     required this.coverUrl,
     required this.title,
     required this.author,
@@ -22,7 +25,7 @@ class BookDetailsHeader extends StatefulWidget {
     required this.pages,
     required this.language,
     required this.audioLen,
-  }) : super(key: key);
+  }); // Sử dụng super để gọi constructor của lớp cha
 
   @override
   _BookDetailsHeaderState createState() => _BookDetailsHeaderState();
@@ -30,23 +33,23 @@ class BookDetailsHeader extends StatefulWidget {
 
 class _BookDetailsHeaderState extends State<BookDetailsHeader> {
   bool isBookLiked = false;
+  bool userTapped = false; // Biến để kiểm tra xem người dùng đã nhấn vào icon chưa
 
   @override
   void initState() {
     super.initState();
-    // Load liked books from shared preferences
-    _loadLikedBooks();
+    FavoriteBooksProvider().loadFavoriteBooks();
+    isBookLiked = FavoriteBooksProvider().isBookFavorite(widget.title);
   }
 
-  Future<void> _loadLikedBooks() async {
-    try {
-      await FavoriteBooksProvider().loadFavoriteBooks();
-      setState(() {
-        isBookLiked = FavoriteBooksProvider().isBookFavorite(widget.title);
-      });
-    } catch (error) {
-      print('Error loading liked books: $error');
-    }
+  // Mở màn hình FavoriteBooksScreen
+  void _openFavoriteBooksScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FavoriteBooksScreen(favoriteBooks: FavoriteBooksProvider().favoriteBooks, onAddFavorite: (BookModel ) {  },),
+      ),
+    );
   }
 
   @override
@@ -54,152 +57,144 @@ class _BookDetailsHeaderState extends State<BookDetailsHeader> {
     return Column(
       children: [
         const SizedBox(height: 50),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  isBookLiked = !isBookLiked;
-                  FavoriteBooksProvider().toggleFavoriteBook(
-                    widget.title,
-                    widget.coverUrl,
-                    widget.author,
-                    0, // Replace with the actual value for price
-                    widget.rating,
-                    0, // Replace with the actual value for totalRating
-                    DateTime.now(), // Add current date and time
-                  );
-                });
-              },
-              child: SvgPicture.asset(
-                "Assets/Icons/heart.svg",
-                color: isBookLiked
-                    ? Colors.red
-                    : Theme.of(context).colorScheme.background,
-              ),
-            ),
-          ],
-        ),
+        _buildHeaderRow(context),
         const SizedBox(height: 40),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                widget.coverUrl,
-                width: 160,
-              ),
-            ),
-          ],
-        ),
+        _buildBookImage(),
         const SizedBox(height: 30),
-        Text(
-          widget.title,
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(color: Theme.of(context).colorScheme.background),
-        ),
-        Text(
-          "Author : ${widget.author}",
-          style: Theme.of(context)
-              .textTheme
-              .labelMedium
-              ?.copyWith(color: Theme.of(context).colorScheme.background),
-        ),
+        _buildBookTitle(),
+        _buildBookAuthor(),
         const SizedBox(height: 10),
+        _buildBookDescription(),
+        _buildBookDetailsRow(),
+      ],
+    );
+  }
+
+  // Xây dựng phần header của trang chi tiết sách
+  Widget _buildHeaderRow(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // Nút quay lại
+        IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        // Icon trái tim để thêm sách vào danh sách yêu thích
+        InkWell(
+          onTap: () {
+            setState(() {
+              userTapped = true; // Người dùng đã nhấn vào icon
+              isBookLiked = !isBookLiked;
+              FavoriteBooksProvider().toggleFavoriteBook(
+                BookModel(
+                  title: widget.title,
+                  coverUrl: widget.coverUrl,
+                  author: widget.author,
+                  price: 0, // Thay thế bằng giá trị thực tế cho giá sách
+                  rating: widget.rating,
+                  totalRating: 0, // Thay thế bằng giá trị thực tế cho tổng số đánh giá
+                  dateTime: DateTime.now(),
+                ),
+              );
+
+              // Kiểm tra nếu cuốn sách được thêm vào yêu thích, thì mở màn hình FavoriteBooksScreen
+              if (isBookLiked) {
+                _openFavoriteBooksScreen();
+              }
+            });
+          },
+          child: SvgPicture.asset(
+            "Assets/Icons/heart.svg",
+            color: userTapped ? Colors.red : Theme.of(context).colorScheme.background,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Xây dựng phần ảnh bìa sách
+  Widget _buildBookImage() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            widget.coverUrl,
+            width: 160,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Xây dựng phần tiêu đề sách
+  Widget _buildBookTitle() {
+    return Text(
+      widget.title,
+      style: Theme.of(context)
+          .textTheme
+          .headlineMedium
+          ?.copyWith(color: Theme.of(context).colorScheme.background),
+    );
+  }
+
+  // Xây dựng phần tác giả sách
+  Widget _buildBookAuthor() {
+    return Text(
+      "Author : ${widget.author}",
+      style: Theme.of(context)
+          .textTheme
+          .labelMedium
+          ?.copyWith(color: Theme.of(context).colorScheme.background),
+    );
+  }
+
+  // Xây dựng phần mô tả sách
+  Widget _buildBookDescription() {
+    return Text(
+      widget.description,
+      textAlign: TextAlign.center,
+      style: Theme.of(context)
+          .textTheme
+          .labelSmall
+          ?.copyWith(color: Theme.of(context).colorScheme.background),
+    );
+  }
+
+  // Xây dựng phần chi tiết sách như rating, số trang, ngôn ngữ, và audio length
+  Widget _buildBookDetailsRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildBookDetailsColumn("Rating", widget.rating),
+        _buildBookDetailsColumn("Pages", widget.pages),
+        _buildBookDetailsColumn("Language", widget.language),
+        _buildBookDetailsColumn("Audio", widget.audioLen),
+      ],
+    );
+  }
+
+  // Xây dựng cột cho từng chi tiết sách
+  Widget _buildBookDetailsColumn(String label, String value) {
+    return Column(
+      children: [
         Text(
-          widget.description,
-          textAlign: TextAlign.center,
+          label,
           style: Theme.of(context)
               .textTheme
               .labelSmall
               ?.copyWith(color: Theme.of(context).colorScheme.background),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Text(
-                  "Rating",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-                Text(
-                  widget.rating,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  "Pages",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-                Text(
-                  widget.pages,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  "Language",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-                Text(
-                  widget.language,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  "Audio",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-                Text(
-                  widget.audioLen,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Theme.of(context).colorScheme.background),
-                ),
-              ],
-            ),
-          ],
+        Text(
+          value,
+          style: Theme.of(context)
+              .textTheme
+              .labelSmall
+              ?.copyWith(color: Theme.of(context).colorScheme.background),
         ),
       ],
     );

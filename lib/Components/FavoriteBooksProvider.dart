@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:e_book/Models/BookModel.dart';
 
 class BookModel {
   final String title;
@@ -54,43 +52,29 @@ class FavoriteBooksProvider extends ChangeNotifier {
   List<BookModel> get favoriteBooks => _favoriteBooks;
 
   Future<void> _saveFavoriteBooks() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      List<String> booksJson = _favoriteBooks.map((book) => jsonEncode(book.toJson())).toList();
-      prefs.setStringList('favoriteBooks', booksJson);
-    } catch (error) {
-      print('Error saving favorite books: $error');
-    }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> booksJson = _favoriteBooks.map((book) => jsonEncode(book.toJson())).toList();
+    prefs.setStringList('favoriteBooks', booksJson);
+    print('Favorite books saved: $booksJson');
   }
 
   Future<void> _loadFavoriteBooks() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      List<String>? booksJson = prefs.getStringList('favoriteBooks');
-      if (booksJson != null) {
-        _favoriteBooks = booksJson.map((json) => BookModel.fromJson(jsonDecode(json))).toList();
-        notifyListeners();
-      }
-    } catch (error) {
-      print('Error loading favorite books: $error');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? booksJson = prefs.getStringList('favoriteBooks');
+    if (booksJson != null) {
+      _favoriteBooks = booksJson.map((json) => BookModel.fromJson(jsonDecode(json))).toList();
+      print('Favorite books loaded: $booksJson');
+      notifyListeners();
     }
   }
 
-  void toggleFavoriteBook(String title, String coverUrl, String author, int price, String rating, int totalRating, DateTime dateTime) {
-    bool isFavorite = isBookFavorite(title);
+  void toggleFavoriteBook(BookModel book) {
+    bool isFavorite = isBookFavorite(book.title);
 
     if (isFavorite) {
-      _favoriteBooks.removeWhere((book) => book.title == title);
+      _favoriteBooks.removeWhere((b) => b.title == book.title);
     } else {
-      _favoriteBooks.add(BookModel(
-        title: title,
-        coverUrl: coverUrl,
-        author: author,
-        price: price,
-        rating: rating,
-        totalRating: totalRating,
-        dateTime: dateTime,
-      ));
+      _favoriteBooks.add(book);
     }
 
     _saveFavoriteBooks();
@@ -101,7 +85,7 @@ class FavoriteBooksProvider extends ChangeNotifier {
     return _favoriteBooks.any((book) => book.title == title);
   }
 
-  Future<void> loadFavoriteBooks() async {
-    await _loadFavoriteBooks();
+  void loadFavoriteBooks() {
+    _loadFavoriteBooks();
   }
 }

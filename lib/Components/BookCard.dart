@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
+  // Đường dẫn đến ảnh bìa của cuốn sách.
   final String coverUrl;
+
+  // Tiêu đề của cuốn sách.
   final String title;
+
+  // Hàm callback sẽ được gọi khi người dùng nhấn vào widget.
   final VoidCallback ontap;
 
+  // Const nhận các tham số bắt buộc như coverUrl, title và ontap.
   const BookCard({
     Key? key,
     required this.coverUrl,
@@ -16,12 +22,16 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
+      // InkWell cho phép xử lý sự kiện nhấn của người dùng.
       child: InkWell(
         onTap: ontap,
+        // SizedBox giới hạn kích thước của widget con.
         child: SizedBox(
           width: 120,
+          // Column chứa các thành phần con theo chiều dọc.
           child: Column(
             children: [
+              // Container chứa ảnh bìa với hiệu ứng boxShadow.
               Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
@@ -34,6 +44,7 @@ class BookCard extends StatelessWidget {
                     offset: Offset(-2, -2),
                   ),
                 ]),
+                // Sử dụng ClipRRect để làm tròn góc của ảnh bìa.
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(

@@ -16,19 +16,31 @@ class SuggestedBooks extends StatefulWidget {
 }
 
 class _SuggestedBooksState extends State<SuggestedBooks> {
+  // Bộ điều khiển cho trường nhập tìm kiếm
   final TextEditingController _searchController = TextEditingController();
+
+  // Danh sách để lưu trữ sách đã xem với timestamp
   List<Map<String, dynamic>> viewedBooks = [];
+
+  // Danh sách để lưu trữ tất cả sách
   List<BookModel> allBooks = [];
+
+  // Danh sách để lưu trữ sách đề xuất dựa trên tìm kiếm
   List<BookModel> suggestedBooks = [];
+
+  // Cờ để xác định liệu có hiển thị tất cả sách hay chỉ là những cuốn sách đã tìm kiếm
   bool showAllBooks = true;
 
   @override
   void initState() {
     super.initState();
+    // Khởi tạo allBooks với dữ liệu từ bookData
     allBooks.addAll(bookData);
+    // Tải danh sách sách đã xem từ SharedPreferences
     loadViewedBooks();
   }
 
+  // Tải danh sách sách đã xem từ SharedPreferences
   void loadViewedBooks() async {
     final prefs = await SharedPreferences.getInstance();
     final viewed = prefs.getStringList('viewedBooks') ?? [];
@@ -45,6 +57,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
     });
   }
 
+  // Lưu danh sách sách đã xem vào SharedPreferences
   void saveViewedBooks() async {
     final prefs = await SharedPreferences.getInstance();
     final viewed = viewedBooks.map((item) {
@@ -59,15 +72,18 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
     prefs.setStringList('viewedBooks', viewed);
   }
 
+  // Tìm kiếm sách dựa trên từ khóa đã nhập
   void searchBooks(String keyword) {
     setState(() {
       suggestedBooks.clear();
     });
 
     if (keyword.isEmpty) {
+      // Nếu trường tìm kiếm trống, hiển thị tất cả sách
       showAllBooks = true;
       suggestedBooks.addAll(allBooks);
     } else {
+      // Nếu có từ khóa, hiển thị sách phù hợp với từ khóa
       showAllBooks = false;
       for (var book in allBooks) {
         if (book.title!.toLowerCase().contains(keyword.toLowerCase())) {
@@ -79,6 +95,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
     }
   }
 
+  // Hiển thị hộp thoại với danh sách sách đã xem
   void showViewedBooksDialog() {
     showDialog(
       context: context,
@@ -94,6 +111,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
                 return ListTile(
                   title: Text('${book.title} - $time'),
                   onTap: () {
+                    // Chuyển đến trang BookDetails khi nhấp vào sách đã xem
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => BookDetails(book: book),
@@ -113,6 +131,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
             ),
             TextButton(
               onPressed: () {
+                // Xoá lịch sử sách đã xem
                 setState(() {
                   viewedBooks = [];
                 });
@@ -129,6 +148,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
 
   @override
   Widget build(BuildContext context) {
+    // Nếu showAllBooks là true, hiển thị tất cả sách; ngược lại, hiển thị sách đề xuất
     if (showAllBooks) {
       suggestedBooks.addAll(allBooks);
     }
@@ -143,14 +163,17 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
       ),
       body: Column(
         children: [
+          // Thanh tìm kiếm
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextField(
               controller: _searchController,
               onChanged: (text) {
+                // Tìm kiếm sách khi người dùng nhập
                 searchBooks(text);
               },
               onSubmitted: (text) {
+                // Xoá nội dung tìm kiếm khi nhấn nút submit
                 _searchController.clear();
               },
               decoration: const InputDecoration(
@@ -161,17 +184,20 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
               style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
+          // Hiển thị sách trong lưới
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1, // Hiển thị thành hai cột
+                crossAxisCount: 1, // Hiển thị trong một cột
               ),
               itemCount: suggestedBooks.length,
               itemBuilder: (context, index) {
+                // Hiển thị từng cuốn sách bằng widget BookCard
                 return BookCard(
                   coverUrl: suggestedBooks[index].coverUrl!,
                   title: suggestedBooks[index].title!,
                   ontap: () {
+                    // Thêm sách đã nhấp vào vào danh sách đã xem và chuyển đến trang chi tiết của sách
                     addToViewedBooks(suggestedBooks[index]);
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -185,6 +211,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
           ),
         ],
       ),
+      // Floating action button để hiển thị hộp thoại với sách đã xem
       floatingActionButton: FloatingActionButton(
         onPressed: showViewedBooksDialog,
         backgroundColor: Colors.blue,
@@ -193,6 +220,7 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
     );
   }
 
+  // Thêm một cuốn sách vào danh sách sách đã xem và lưu vào SharedPreferences
   void addToViewedBooks(BookModel book) {
     setState(() {
       viewedBooks.add({
@@ -202,11 +230,12 @@ class _SuggestedBooksState extends State<SuggestedBooks> {
     });
     saveViewedBooks();
   }
-}
 
-String getVietnamTime() {
-  final now = DateTime.now();
-  final vietnamTime = now.toLocal();
-  final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
-  return formatter.format(vietnamTime);
+  // Lấy thời gian hiện tại ở múi giờ Việt Nam
+  String getVietnamTime() {
+    final now = DateTime.now();
+    final vietnamTime = now.toLocal();
+    final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+    return formatter.format(vietnamTime);
+  }
 }

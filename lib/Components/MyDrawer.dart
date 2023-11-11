@@ -94,17 +94,6 @@ class MyDrawer extends StatelessWidget {
           const Divider(thickness: 1),
           ListTile(
             title: const Text(
-              "Danh Mục Yêu Thích",
-              style: TextStyle(fontSize: 16),
-            ),
-            leading: const Icon(Icons.speaker, color: Colors.blue),
-            onTap: () {
-              Get.to(FavoriteBooksScreen(favoriteBooks: FavoriteBooksProvider().favoriteBooks));
-            },
-          ),
-          const Divider(thickness: 1),
-          ListTile(
-            title: const Text(
               "Khác",
               style: TextStyle(fontSize: 16),
             ),
