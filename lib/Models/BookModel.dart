@@ -14,89 +14,66 @@ class BookModel {
   String? coverUrl;
   int? price;
   String? numberofRating;
+  bool isLiked;
 
-  BookModel(
-      {this.id,
-      this.title,
-      this.description,
-      this.rating,
-      this.pages,
-      this.language,
-      this.audioLen,
-      this.author,
-      this.aboutAuthor,
-      this.bookurl,
-      this.audioUrl,
-      this.category,
-      this.price,
-      this.coverUrl,
-      this.numberofRating,});
+  BookModel({
+    this.id,
+    this.title,
+    this.description,
+    this.rating,
+    this.pages,
+    this.language,
+    this.audioLen,
+    this.author,
+    this.aboutAuthor,
+    this.bookurl,
+    this.audioUrl,
+    this.category,
+    this.price,
+    this.coverUrl,
+    this.numberofRating,
+    this.isLiked = false,
+  });
 
-  BookModel.fromJson(Map<String, dynamic> json) {
-    if (json["id"] is String) {
-      id = json["id"];
-    }
-    if (json["title"] is String) {
-      title = json["title"];
-    }
-    if (json["description"] is String) {
-      description = json["description"];
-    }
-    if (json["rating"] is String) {
-      rating = json["rating"];
-    }
-    if (json["pages"] is int) {
-      pages = json["pages"];
-    }
-    if (json["language"] is String) {
-      language = json["language"];
-    }
-    if (json["audioLen"] is String) {
-      audioLen = json["audioLen"];
-    }
-    if (json["author"] is String) {
-      author = json["author"];
-    }
-    if (json["aboutAuthor"] is String) {
-      aboutAuthor = json["aboutAuthor"];
-    }
-    if (json["bookurl"] is String) {
-      bookurl = json["bookurl"];
-    }
-    if (json["audioUrl"] is String) {
-      audioUrl = json["audioUrl"];
-    }
-    if (json["category"] is String) {
-      category = json["category"];
-    }
-    if (json["coverUrl"] is String) {
-      coverUrl = json["coverUrl"];
-    }
-    if (json["price"] is int) {
-      price = json["MaGiamGia"];
-    }
-    if (json["numberofRating"] is int) {
-      numberofRating = json["numberofRating"];
-    }
+  factory BookModel.fromJson(Map<String, dynamic> json) {
+    return BookModel(
+      id: json["id"],
+      title: json["title"],
+      description: json["description"],
+      rating: json["rating"],
+      pages: json["pages"],
+      language: json["language"],
+      audioLen: json["audioLen"],
+      author: json["author"],
+      aboutAuthor: json["aboutAuthor"],
+      bookurl: json["bookurl"],
+      audioUrl: json["audioUrl"],
+      category: json["category"],
+      coverUrl: json["coverUrl"],
+      price: json["price"],
+      numberofRating: json["numberofRating"],
+      isLiked: json["isLiked"] ?? false,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["description"] = description;
-    _data["rating"] = rating;
-    _data["pages"] = pages;
-    _data["language"] = language;
-    _data["audioLen"] = audioLen;
-    _data["author"] = author;
-    _data["aboutAuthor"] = aboutAuthor;
-    _data["bookurl"] = bookurl;
-    _data["audioUrl"] = audioUrl;
-    _data["category"] = category;
-    _data["coverUrl"] = coverUrl;
-    _data["MaGiamGia"] = price;
-    _data["numberofRating"] = numberofRating;
-    return _data;
+    return {
+      "id": id,
+      "title": title,
+      "description": description,
+      "rating": rating,
+      "pages": pages,
+      "language": language,
+      "audioLen": audioLen,
+      "author": author,
+      "aboutAuthor": aboutAuthor,
+      "bookurl": bookurl,
+      "audioUrl": audioUrl,
+      "category": category,
+      "coverUrl": coverUrl,
+      "price": price,
+      "numberofRating": numberofRating,
+      "isLiked": isLiked,
+    };
   }
 }

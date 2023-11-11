@@ -9,19 +9,38 @@ class AdminVerificationPage extends StatefulWidget {
 }
 
 class _AdminVerificationPageState extends State<AdminVerificationPage> {
+  // Mật khẩu admin để kiểm tra
   String adminPassword = "123456";
+
+  // Controller để quản lý nội dung nhập vào ô "Tên Admin"
   TextEditingController passwordController = TextEditingController();
+
+  // Thông báo lỗi và thành công
   String errorMessage = "";
   String successMessage = "";
+
+  // Thông báo đặc biệt cho admin
   String adminMessage = "";
+
+  // Số lần nhập sai mật khẩu
   int wrongPasswordCount = 0;
+
+  // Trạng thái đóng băng xác minh
   bool isVerificationFrozen = false;
 
+  // Controller cho ô mật khẩu trong popup
   TextEditingController popupPasswordController = TextEditingController();
+
+  // Thông báo lỗi trong popup
   String popupErrorMessage = "";
+
+  // Số lần nhập sai mật khẩu trong popup
   int wrongPopupPasswordCount = 0;
+
+  // Trạng thái đóng băng xác minh trong popup
   bool isPopupVerificationFrozen = false;
 
+  // Biến tạm để lưu giữ tên admin khi người dùng nhập vào ô "Tên Admin"
   String temporaryAdminName = "";
 
   @override
@@ -31,18 +50,24 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
     passwordController.clear();
   }
 
+  // Hàm xác minh admin
   void verifyAdmin() {
+    // Lưu giữ tên admin từ ô "Tên Admin"
     temporaryAdminName = passwordController.text;
 
+    // Kiểm tra xem xác minh có đang đóng băng không
     if (isVerificationFrozen) {
       return;
     }
 
+    // Lấy giá trị từ ô "Tên Admin"
     String userInput = temporaryAdminName;
 
+    // Kiểm tra xem tên admin có đúng không
     if (userInput == "Hung") {
       Navigator.pop(context);
     } else if (userInput == "Phuong") {
+      // Xử lý khi nhập sai mật khẩu quá 5 lần
       if (wrongPasswordCount >= 5) {
         errorMessage =
         "Bạn đã nhập sai mật khẩu quá nhiều lần. Chức năng đã bị đóng băng.";
@@ -59,7 +84,11 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
         });
         return;
       }
+
+      // Thiết lập giá trị ban đầu cho ô mật khẩu trong popup
       popupPasswordController.text = "";
+
+      // Hiển thị hộp thoại xác minh
       showDialog(
         context: context,
         builder: (context) {
@@ -93,6 +122,7 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
+                      // Kiểm tra xem xác minh trong popup có đang đóng băng không
                       if (isPopupVerificationFrozen) {
                         popupErrorMessage =
                         "Chức năng đã bị đóng băng. Vui lòng thử lại sau.";
@@ -100,12 +130,15 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
                         return;
                       }
 
+                      // Xác minh mật khẩu admin
                       if (popupPasswordController.text == adminPassword) {
                         successMessage = "Xác minh thành công!";
                         adminMessage = "Mật khẩu đúng!";
                         popupErrorMessage = "";
                         errorMessage = "";
                         setState(() {});
+
+                        // Đợi 3 giây rồi chuyển đến trang thêm sách mới
                         Future.delayed(const Duration(seconds: 3), () {
                           Navigator.pushReplacement(
                             context,
@@ -113,24 +146,29 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
                               builder: (context) => const AddNewBook(),
                             ),
                           );
+
+                          // Xóa giá trị trong ô mật khẩu popup
                           popupPasswordController.clear();
                           successMessage = "";
                           adminMessage = "";
                           setState(() {});
                         });
                       } else {
+                        // Xử lý khi nhập sai mật khẩu trong popup
                         popupErrorMessage =
                         "Mật khẩu không đúng. Vui lòng thử lại.";
                         adminMessage = "";
                         wrongPopupPasswordCount++;
                         setState(() {});
 
+                        // Hiển thị cảnh báo khi nhập sai 3 lần
                         if (wrongPopupPasswordCount == 3) {
                           popupErrorMessage =
                           "Bạn đã nhập sai mật khẩu 3 lần.";
                           setState(() {});
                         }
 
+                        // Đóng băng xác minh trong popup khi nhập sai 5 lần
                         if (wrongPopupPasswordCount == 5) {
                           popupErrorMessage =
                           "Bạn đã nhập sai mật khẩu 5 lần. Chức năng đã bị đóng băng.";
@@ -148,16 +186,19 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
         },
       );
     } else {
+      // Xử lý khi tên admin không đúng
       errorMessage = "Tên Admin không đúng. Vui lòng thử lại.";
       adminMessage = "";
       wrongPasswordCount++;
       setState(() {});
 
+      // Hiển thị cảnh báo khi nhập sai 3 lần
       if (wrongPasswordCount == 3) {
         errorMessage = "Cảnh Báo !!! Bạn đã nhập sai mật khẩu 3 lần.";
         setState(() {});
       }
 
+      // Đóng băng xác minh khi nhập sai 5 lần
       if (wrongPasswordCount == 5) {
         errorMessage =
         "Bạn đã nhập sai mật khẩu 5 lần. Chức năng đã bị đóng băng.";
@@ -178,6 +219,7 @@ class _AdminVerificationPageState extends State<AdminVerificationPage> {
 
   @override
   void dispose() {
+    // Xóa giá trị trong ô "Tên Admin" khi trang bị hủy
     passwordController.clear();
     temporaryAdminName = "";
     super.dispose();

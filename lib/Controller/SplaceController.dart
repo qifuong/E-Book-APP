@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class SplaceController extends GetxController {
-  final auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance; // Firebase Auth để kiểm tra trạng thái đăng nhập
 
   @override
   void onInit() {
@@ -12,12 +12,13 @@ class SplaceController extends GetxController {
     splaceController();
   }
 
+  // Hàm chuyển hướng dựa trên trạng thái đăng nhập
   void splaceController() {
     Future.delayed(const Duration(seconds: 4), () {
       if (auth.currentUser != null) {
-        Get.offAll(const HomePage());
+        Get.offAll(const HomePage()); // Nếu đã đăng nhập, chuyển đến trang chủ
       } else {
-        Get.offAll(const WelcomePage());
+        Get.offAll(const WelcomePage()); // Nếu chưa đăng nhập, chuyển đến trang chào mừng
       }
     });
   }

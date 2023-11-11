@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:e_book/Components/MyDrawer.dart';
 
+// Mô hình dữ liệu liên hệ
 class ContactModel {
   final String name;
   final String number;
@@ -9,13 +10,15 @@ class ContactModel {
 }
 
 class Infor extends StatelessWidget {
-  Infor({super.key});
-
+  // Danh sách các liên hệ
   final List<ContactModel> contactList = [
     ContactModel(name: "Le Minh Hung", number: "0908512356"),
     ContactModel(name: "Truong Thien Bao", number: "091812356"),
     ContactModel(name: "Le Quy Phuong", number: "0979512356"),
   ];
+
+  // Hàm xây dựng widget
+  Infor({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class Infor extends StatelessWidget {
         backgroundColor: Colors.blue,
       ),
       drawer: const MyDrawer(),
+      // Sử dụng widget MyDrawer như một menu bên
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -72,6 +76,7 @@ class Infor extends StatelessWidget {
     );
   }
 
+  // Hiển thị hộp thoại đếm ngược khi người dùng nhấn vào liên hệ
   void _showCallForwardDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -82,6 +87,7 @@ class Infor extends StatelessWidget {
   }
 }
 
+// Widget hiển thị hộp thoại đếm ngược
 class _CountdownDialog extends StatefulWidget {
   @override
   _CountdownDialogState createState() => _CountdownDialogState();
@@ -93,9 +99,10 @@ class _CountdownDialogState extends State<_CountdownDialog> {
   @override
   void initState() {
     super.initState();
-    startCountdown();
+    startCountdown(); // Bắt đầu đếm ngược khi hộp thoại được tạo
   }
 
+  // Hàm đếm ngược
   void startCountdown() {
     Future.delayed(const Duration(seconds: 1), () {
       if (countdown > 1) {
@@ -104,7 +111,7 @@ class _CountdownDialogState extends State<_CountdownDialog> {
         });
         startCountdown();
       } else {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(); // Đóng hộp thoại khi đếm ngược kết thúc
       }
     });
   }
@@ -117,7 +124,7 @@ class _CountdownDialogState extends State<_CountdownDialog> {
       actions: <Widget>[
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(); // Đóng hộp thoại khi người dùng nhấn OK
           },
           child: const Text('OK'),
         ),

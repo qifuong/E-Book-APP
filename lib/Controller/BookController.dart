@@ -22,27 +22,26 @@ class BookController extends GetxController {
   TextEditingController language = TextEditingController();
   TextEditingController price = TextEditingController();
   ImagePicker imagePicker = ImagePicker();
-  final storage = FirebaseStorage.instance;
-  final db = FirebaseFirestore.instance;
-  final fAuth = FirebaseAuth.instance;
-  RxString imageUrl = "".obs;
-  RxString pdfUrl = "".obs;
-  int index = 0;
-  RxBool isImageUploading = false.obs;
-  RxBool isPdfUploading = false.obs;
-  RxBool isPostUploading = true.obs;
-  var bookData = RxList<BookModel>();
-  var currentUserBooks = RxList<BookModel>();
+  final storage = FirebaseStorage.instance; // Firebase Storage để lưu trữ và quản lý tệp tin
+  final db = FirebaseFirestore.instance; // Firestore để làm việc với cơ sở dữ liệu
+  final fAuth = FirebaseAuth.instance; // Firebase Auth để thực hiện xác thực người dùng
+  RxString imageUrl = "".obs; // theo dõi URL của ảnh
+  RxString pdfUrl = "".obs; // để theo dõi URL của PDF
+  int index = 0; // Biến để theo dõi chỉ số của sách
+  RxBool isImageUploading = false.obs; // Biến để theo dõi trạng thái tải ảnh
+  RxBool isPdfUploading = false.obs; // Biến để theo dõi trạng thái tải PDF
+  RxBool isPostUploading = true.obs; // Biến để theo dõi trạng thái đang tải lên
+  var bookData = RxList<BookModel>(); // Danh sách các sách từ Firestore
+  var currentUserBooks = RxList<BookModel>(); // Danh sách sách của người dùng hiện tại
   final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
-    getAllBooks();
-
+    getAllBooks(); // Gọi hàm để lấy tất cả sách từ Firestore
   }
 
+  // Hàm để lấy tất cả sách từ Firestore
   void getAllBooks() async {
     successMessage("Book Get Fun");
     var books = await db.collection("Books").get();
@@ -50,6 +49,8 @@ class BookController extends GetxController {
       bookData.add(BookModel.fromJson(book.data()));
     }
   }
+
+  // Hàm để lấy sách của người dùng từ Firestore
   void getUserBook() async {
     currentUserBooks.clear();
     var books = await db
@@ -62,10 +63,10 @@ class BookController extends GetxController {
     }
   }
 
+  // Hàm để chọn ảnh từ thư viện
   void pickImage() async {
     isImageUploading.value = true;
-    final XFile? image =
-    await imagePicker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       if (kDebugMode) {
         print(image.path);
@@ -75,6 +76,7 @@ class BookController extends GetxController {
     isImageUploading.value = false;
   }
 
+  // Hàm để tải ảnh lên Firebase Storage
   void uploadImageToFirebase(File image) async {
     var uuid = const Uuid();
     var filename = uuid.v1();
@@ -88,6 +90,7 @@ class BookController extends GetxController {
     isImageUploading.value = false;
   }
 
+  // Hàm để tạo mới sách và tải lên Firebase Firestore
   void createBook() async {
     isPostUploading.value = true;
     var newBook = BookModel(
@@ -124,6 +127,7 @@ class BookController extends GetxController {
     getUserBook();
   }
 
+  // Hàm để chọn file PDF từ thiết bị
   void pickPDF() async {
     isPdfUploading.value = true;
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -140,9 +144,10 @@ class BookController extends GetxController {
           print("File Bytes: $fileBytes");
         }
 
-        final response =
-        await storage.ref().child("Pdf/$fileName").putData(fileBytes);
+        // Tải lên PDF lên Firebase Storage
+        final response = await storage.ref().child("Pdf/$fileName").putData(fileBytes);
 
+        // Lấy URL của PDF sau khi tải lên
         final downloadURL = await response.ref.getDownloadURL();
         pdfUrl.value = downloadURL;
         if (kDebugMode) {
@@ -154,12 +159,12 @@ class BookController extends GetxController {
         }
       }
     } else {
-      // ignore: avoid_print
       print("No file selected");
     }
     isPdfUploading.value = false;
   }
 
+  // Hàm để thêm sách vào cơ sở dữ liệu của người dùng
   void addBookInUserDb(BookModel book) async {
     await db
         .collection("Book")
@@ -167,5 +172,4 @@ class BookController extends GetxController {
         .collection("Books")
         .add(book.toJson());
   }
-
 }

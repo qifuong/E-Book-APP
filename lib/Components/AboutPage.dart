@@ -5,6 +5,7 @@ import 'package:e_book/Components/MyDrawer.dart';
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key});
 
+  // Hàm mở URL bằng trình duyệt
   Future<void> _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -26,6 +27,7 @@ class AboutPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Phần tiêu đề chào mừng
             const Text(
               "Chào mừng bạn đến với ứng dụng của chúng tôi!",
               style: TextStyle(
@@ -35,6 +37,8 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+
+            // Phần thông tin nhóm đồ án
             const Text(
               "Đây là đồ án thực hiện bởi nhóm chúng tôi gồm:",
               style: TextStyle(
@@ -44,10 +48,15 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+
+            // Hiển thị thông tin từng thành viên trong nhóm
             _buildTeamMember("Le Minh Hung", "21748020100xx - VanLangUni"),
             _buildTeamMember("Huynh Thien Bao", "21748020100xx - VanLangUni"),
             _buildTeamMember("Le Quy Phuong", "21748020100xx - VanLangUni"),
+
             const SizedBox(height: 16),
+
+            // Nút xem dự án trên GitHub
             TextButton(
               onPressed: () => _launchURL("https://github.com/qifuong/E-Book-APP/"),
               child: const Text(
@@ -65,10 +74,12 @@ class AboutPage extends StatelessWidget {
     );
   }
 
+  // Hàm xây dựng giao diện hiển thị thông tin thành viên nhóm
   Widget _buildTeamMember(String name, String info) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Tên thành viên
         Text(
           name,
           style: const TextStyle(
@@ -77,6 +88,8 @@ class AboutPage extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+
+        // Thông tin thành viên
         Text(
           info,
           style: const TextStyle(

@@ -10,39 +10,37 @@ var categoryData = [
     "icon": "Assets/Icons/plane.svg",
     "lebel": "Travel",
     "url": "https://www.goodreads.com/genres/travel",
-
   },
   {
     "icon": "Assets/Icons/world.svg",
     "lebel": "Documentary",
     "url": "https://www.goodreads.com/genres/Documentary",
-
   },
   {
     "icon": "Assets/Icons/heart.svg",
     "lebel": "Love Story",
     "url": "https://www.goodreads.com/genres/love-story",
-
   },
 ];
 
 var bookData = [
   BookModel(
-      id: "1",
-      title: "Boundraties",
-      description:
-          "Christians often focus so much on being loving and giving that they forget their own limits and limitations. Have you ever found yourself wondering: Can I set limits and still be a loving person? How do I answer someone who wants my time, love, energy, or money? Why do I feel guilty when I consider setting boundaries?",
-      aboutAuthor: "hi my name is Le Minh Hung and i have written this book",
-      audioLen: "20",
-      author: "Le Minh Hung",
-      coverUrl: "Assets/Images/boundraries.jpg",
-      rating: "10",
-      category: "Documentary",
-      numberofRating: "10",
-      price: 10120,
-      pages: 234,
-      language: "ENG",
-      bookurl: "https://ati.dae.gov.in/ati12052021.pdf",),
+    id: "1",
+    title: "Boundraties",
+    description:
+        "Christians often focus so much on being loving and giving that they forget their own limits and limitations. Have you ever found yourself wondering: Can I set limits and still be a loving person? How do I answer someone who wants my time, love, energy, or money? Why do I feel guilty when I consider setting boundaries?",
+    aboutAuthor: "hi my name is Le Minh Hung and i have written this book",
+    audioLen: "20",
+    author: "Le Minh Hung",
+    coverUrl: "Assets/Images/boundraries.jpg",
+    rating: "10",
+    category: "Documentary",
+    numberofRating: "10",
+    price: 10120,
+    pages: 234,
+    language: "ENG",
+    bookurl: "https://ati.dae.gov.in/ati12052021.pdf",
+  ),
   BookModel(
       id: "2",
       title: "Daily Stoice",

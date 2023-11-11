@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class BookDetails extends StatelessWidget {
   final BookModel book;
-  const BookDetails({super.key, required this.book});
+
+  const BookDetails({Key? key, required this.book}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,6 @@ class BookDetails extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(20),
-              //height: 500,
               color: primaryColor,
               child: Row(
                 children: [
@@ -28,7 +28,7 @@ class BookDetails extends StatelessWidget {
                       description: book.description!,
                       rating: book.rating!,
                       pages: book.pages.toString(),
-                      langugae: book.language.toString(),
+                      language: book.language.toString(),
                       audioLen: book.audioLen!,
                     ),
                   )
@@ -41,48 +41,60 @@ class BookDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text("About Book",
-                          style: Theme.of(context).textTheme.bodyMedium),
-                    ],
-                  ),
+                  SectionTitle("About Book"),
                   const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Text(
-                            "Đồ án này thực hiện bởi Huynh Thien Bao, Le Minh Hung Và Le Quy Phuong, Nếu có bất kỳ sai sót trong quá trình thực hiện của đồ án, Mong quý thầy cô thông cảm vào bỏ qua, Cảm ơn mọi người",
-                            style: Theme.of(context).textTheme.labelMedium),
-                      ),
-                    ],
+                  DescriptionText(
+                    "Đồ án này thực hiện bởi Huỳnh Thiện Bảo, Lê Minh Hưng và Lê Quý Phương. Nếu có bất kỳ sai sót trong quá trình thực hiện của đồ án, mong quý thầy cô thông cảm và bỏ qua. Cảm ơn mọi người.",
                   ),
-                  Row(
-                    children: [
-                      Text("About Book",
-                          style: Theme.of(context).textTheme.bodyMedium),
-                    ],
-                  ),
+                  SectionTitle("About Book (English)"),
                   const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Text(
-                            "This project was made by Huynh Thien Bao, Le Minh Hung and Le Quy Phuong. If there are any errors during the implementation of the project, I hope you will understand and forgive me. Thank you everyone.",
-                            style: Theme.of(context).textTheme.labelMedium),
-                      ),
-                    ],
+                  DescriptionText(
+                    "This project was made by Huỳnh Thiện Bảo, Lê Minh Hưng, and Lê Quý Phương. If there are any errors during the implementation of the project, I hope you will understand and forgive me. Thank you, everyone.",
                   ),
                   const SizedBox(height: 30),
-                  BookActionBtn(
-                    bookUrl: book.bookurl!,
-                  ),
+                  BookActionBtn(bookUrl: book.bookurl!),
                 ],
               ),
             )
           ],
         ),
       ),
+    );
+  }
+}
+
+class SectionTitle extends StatelessWidget {
+  final String title;
+
+  const SectionTitle(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(title, style: Theme.of(context).textTheme.bodyMedium),
+      ],
+    );
+  }
+}
+
+class DescriptionText extends StatelessWidget {
+  final String text;
+
+  const DescriptionText(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Flexible(
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.labelMedium,
+            overflow: TextOverflow.fade, // or TextOverflow.ellipsis
+          ),
+        ),
+      ],
     );
   }
 }

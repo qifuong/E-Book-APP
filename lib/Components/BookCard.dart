@@ -5,11 +5,12 @@ class BookCard extends StatelessWidget {
   final String title;
   final VoidCallback ontap;
 
-  const BookCard(
-      {super.key,
-      required this.coverUrl,
-      required this.title,
-      required this.ontap});
+  const BookCard({
+    Key? key,
+    required this.coverUrl,
+    required this.title,
+    required this.ontap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +23,25 @@ class BookCard extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 8,
-                      offset: Offset(-2, -2),
-                    )
-                  ]),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      coverUrl,
-                      width: 120,
-                    ),
-                  )),
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                    offset: Offset(-2, -2),
+                  ),
+                ]),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    coverUrl,
+                    width: 120,
+                  ),
+                ),
+              ),
               SizedBox(height: 10),
               Text(
                 title,

@@ -1,15 +1,17 @@
 import 'package:e_book/Components/AboutPage.dart';
+import 'package:e_book/Components/FavoriteBooksProvider.dart';
 import 'package:e_book/Components/Infor.dart';
 import 'package:e_book/Components/PrivacyPolicy.dart';
 import 'package:e_book/Pages/Homepage/HomePage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import services.dart for clipboard access
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import 'FavoriteBooksScreen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key});
 
-  // Function to copy the email to the clipboard
   void copyEmailToClipboard() {
     const String email = "support@example.com";
     Clipboard.setData(const ClipboardData(text: email));
@@ -87,6 +89,17 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.security, color: Colors.blue),
             onTap: () {
               Get.to(const PrivacyPolicy());
+            },
+          ),
+          const Divider(thickness: 1),
+          ListTile(
+            title: const Text(
+              "Danh Mục Yêu Thích",
+              style: TextStyle(fontSize: 16),
+            ),
+            leading: const Icon(Icons.speaker, color: Colors.blue),
+            onTap: () {
+              Get.to(FavoriteBooksScreen(favoriteBooks: FavoriteBooksProvider().favoriteBooks));
             },
           ),
           const Divider(thickness: 1),

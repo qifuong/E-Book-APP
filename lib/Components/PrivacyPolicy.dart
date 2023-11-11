@@ -11,7 +11,7 @@ class PrivacyPolicy extends StatelessWidget {
         title: const Text("Chính Sách Và Quyền Riêng Tư"),
         backgroundColor: Colors.blue,
       ),
-      drawer: const MyDrawer(),
+      drawer: const MyDrawer(), // Sử dụng widget MyDrawer làm drawer của trang
       body: const Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -26,6 +26,7 @@ class PrivacyPolicy extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
+            // Mô tả chính sách quyền riêng tư
             Text(
               "Dưới đây là chính sách quyền riêng tư cho ứng dụng của chúng tôi. Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn và sử dụng nó một cách hợp pháp.",
               style: TextStyle(
@@ -42,6 +43,7 @@ class PrivacyPolicy extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
+            // Liệt kê các thông tin cá nhân có thể thu thập
             Text(
               "- Tên và thông tin liên hệ",
               style: TextStyle(
@@ -64,6 +66,7 @@ class PrivacyPolicy extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
+            // Mô tả cách chúng tôi sử dụng thông tin cá nhân
             Text(
               "Chúng tôi sử dụng thông tin cá nhân này để cải thiện dịch vụ của mình và cung cấp cho bạn trải nghiệm tốt hơn.",
               style: TextStyle(
@@ -79,6 +82,7 @@ class PrivacyPolicy extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
+            // Thông tin liên hệ
             Text(
               "Email: contact@example.com",
               style: TextStyle(
