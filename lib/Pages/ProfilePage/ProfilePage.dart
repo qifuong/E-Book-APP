@@ -13,10 +13,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Khởi tạo các controllers cần thiết
     AuthController authController = Get.put(AuthController());
     BookController bookController = Get.put(BookController());
 
     return Scaffold(
+      // Nút hành động nổi để thêm sách mới
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(AdminVerificationPage());
@@ -29,6 +31,7 @@ class ProfilePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Phần đầu trang với thông tin người dùng
             Container(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
               color: Theme.of(context).colorScheme.primary,
@@ -40,13 +43,14 @@ class ProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(height: 20),
+                        // Hàng chứa nút quay lại, tiêu đề và nút đăng xuất
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MyBackButton(),
                             Text(
-                              "Profile",
+                              "Hồ sơ",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
@@ -70,6 +74,7 @@ class ProfilePage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 60),
+                        // Hình ảnh đại diện của người dùng
                         Container(
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
@@ -94,6 +99,7 @@ class ProfilePage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 20),
+                        // Tên và email của người dùng
                         Text(
                           "${authController.auth.currentUser?.displayName ?? ''}",
                           style: Theme.of(context)
@@ -122,13 +128,14 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
+            // Phần sách của người dùng
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      Text("Your Books",
+                      Text("Sách của bạn",
                           style: Theme.of(context).textTheme.labelMedium),
                     ],
                   ),

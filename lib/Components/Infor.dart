@@ -35,7 +35,7 @@ class Infor extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              'Danh bạ',
+              'Liên Hệ Hỗ Trợ',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
